@@ -40,6 +40,8 @@ You can run the following to see the available options
 python /path_to_cloned_repo/rDragView.py --help
 ```
 
+The material index can be visualised as well as the flux. If there is more than one energy group, the flux for each energy group is saved to a different file. 
+
 ### 1A. `view`
 
 This assumes that the geometry, macrolib, tracking and flux LCM objects are available in the current working directory and named as `_GEOM`, `_MACR`, `_TRCK` and `_FLUX` respectively. You can then run
