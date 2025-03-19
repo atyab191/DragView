@@ -1,0 +1,87 @@
+PARAMETER Geom Macr Trck Syst Flux ::
+   ::: LINKED_LIST Geom Macr Trck Syst Flux ; ;
+*
+MODULE GEO: MAC: ASM: END: SNT: FLU: ;
+*
+SEQ_ASCII OutGeom :: FILE './_GEOM' ;
+SEQ_ASCII OutMacr :: FILE './_MACR' ;
+SEQ_ASCII OutTrck :: FILE './_TRCK' ;
+! SEQ_ASCII OutSyst :: FILE './_ASMR' ;
+SEQ_ASCII OutFlux :: FILE './_FLUX' ;
+*
+*
+* spl = region split
+* sch = scheme parameter
+* spa = spatial order
+* and = sn order
+* sca = scattering
+*
+*
+INTEGER spl := 3 ;
+INTEGER sch := 1 ;
+INTEGER spa := 0 ;
+INTEGER ang := 4 ;
+INTEGER sca := 2 ;
+*
+Geom := GEO: :: HEX  127
+       EDIT 0
+       SPLITL <<spl>>
+       HBC   COMPLETE  VOID
+       SIDE 19.0
+       MIX
+       1
+       1 1 1 1 1 1
+       1 1 1 1 1 1 1 1 1 1 1 1 
+       2 1 1 2 1 1 2 1 1 2 1 1 2 1 1 2 1 1
+       2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+       3 2 2 2 2 3 2 2 2 2 3 2 2 2 2 3 2 2 2 2 3 2 2 2 2 3 2 2 2 2  
+       0 3 3 3 3 3 0 3 3 3 3 3 0 3 3 3 3 3 0 3 3 3 3 3 0 3 3 3 3 3
+       0 3 3 3 3 3
+       ;
+OutGeom := Geom ;
+*
+*
+Macr := MAC: ::
+ EDIT 0 NGRO 1 NMIX 3 NIFI 1 ANIS 2
+ READ INPUT
+ MIX     1
+     TOTAL  0.025
+    NUSIGF  0.0155
+       CHI  1.0
+      SCAT  1 1 0.013
+            1 1 0.0
+ MIX     2
+     TOTAL  0.025
+      SCAT  1 1 0.024
+            1 1 0.006
+ MIX     3
+     TOTAL  0.075
+      SCAT  1 1 0.0
+            1 1 0.0
+ ;
+OutMacr := Macr ;
+*
+*
+Trck := SNT: Geom ::
+      TITLE '2D TEST CASE WITH SNATCH REF KEFF'
+      EDIT 0 MAXR 25000
+      SCHM <<sch>> 
+      DIAM <<spa>> 
+      SN <<ang>> 
+      SCAT <<sca>> 
+      EPSI 1.E-5
+      MAXI 25
+      NLIVO NDSA ONEG
+      QUAD 2 (*Level-Symmetric*) ;
+OutTrck := Trck ;
+*
+*
+Syst := ASM: Macr Trck :: EDIT 0 ARM ;
+*
+*
+Flux :=  FLU: Macr Trck Syst ::
+      EDIT 0 TYPE K EXTE 100 1E-5 ;
+OutFlux := Flux ;
+*
+*
+END: ;
