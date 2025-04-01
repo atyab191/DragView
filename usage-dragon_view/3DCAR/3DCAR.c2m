@@ -23,8 +23,8 @@ INTEGER ang := 4 ;
 INTEGER sca := 1 ;
 *
 INTEGER spI := spl 1 * ; ! 2
-INTEGER spC := spl 2 * ; ! 9
-INTEGER spA := spl 1 * ; ! 5
+INTEGER spC := spl 4 * ; ! 9
+INTEGER spA := spl 2 * ; ! 5
 INTEGER spB := spl 1 * ; ! 2
 *
 *
