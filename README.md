@@ -72,7 +72,7 @@ ParaView can be downloaded at the following [link](https://www.paraview.org/down
 ```
 File -> Open
 ```
-and navigate to the folder containing the vtu files. Select the desired file and _*click on 'Apply'*_ (usually found in the left panel in the 'Properties' tab. 
+and navigate to the folder containing the vtu files. Select the desired file and _*click on 'Apply'*_ (usually found in the left panel in the 'Properties' tab). 
 
 There are countless visualisation (e.g. clip, slice, extract) and data manipulation options available natively in ParaView, and the [wiki](https://www.paraview.org/Wiki/ParaView) is a good place to start. 
 
