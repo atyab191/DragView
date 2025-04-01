@@ -16,11 +16,15 @@ _From left to right, top to bottom: AIC benchmark (2D Cartesian model), Takeda M
 There are two libraries needed apart from the default python ones: `vtk` and `pygan`. Once these are installed, you need to ensure that the paths to these installations are added to your `PYTHONPATH` environment variable.
   - `vtk` can be easily installed using `pip` ([link](https://pypi.org/project/vtk/)) in your conda environment or otherwise. If using `pip`, there is generally no need to update the `PYTHONPATH` for `vtk`.
     - _For Polytechnique Montreal users_, this is already installed on the **Bateman** and **Planck** servers. The installation is path `/usr/localp/vtk/build`.
-  - `pygan` is available with the latest DRAGON5 distribution [(link](http://merlin.polymtl.ca)). After running `make` in the `Pygan` directory, the relevant path will be something like `/path_to_here/main_dragon5_folder/Pygan/lib/Linux_aarch64/python`.
-
-To your `.bashrc` or `.zshrc` or `.profile`, then add:
+  - `pygan` is available with the latest DRAGON5 distribution [(link](http://merlin.polymtl.ca)). Make sure to run the following command in the `Pygan` directory:
 ```sh
-export PYTHONPATH=$PYTHONPATH:/path_to_here/main_dragon5_folder/Pygan/lib/Linux_aarch64/python:/usr/localp/vtk/build
+make hdf5=1 pip=1
+```
+`pip=1` will ensure that the required libraries will be installed using `pip` and will not require using the `PYTHONPATH`.
+
+If needed, to your `.bashrc` or `.zshrc` or `.profile`, add:
+```sh
+export PYTHONPATH=$PYTHONPATH:/usr/localp/vtk/build
 ```
 
 Finally, clone this repository somewhere and check your environment variables are correctly set:
